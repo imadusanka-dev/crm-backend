@@ -1,0 +1,11 @@
+{
+  "fristName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phoneNumber": "+1234567890",
+  "address": "123 Main Street",
+  "city": "New York",
+  "state": "NY",
+  "country": "USA"
+}
+
