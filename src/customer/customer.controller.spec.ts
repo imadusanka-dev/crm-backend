@@ -44,7 +44,7 @@ describe('CustomerController', () => {
   describe('createCustomer', () => {
     it('should create a customer', async () => {
       const createDto: CreateCustomerDto = {
-        fristName: 'John',
+        firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@example.com',
         phoneNumber: '+1234567890',
@@ -99,7 +99,7 @@ describe('CustomerController', () => {
   describe('updateCustomer', () => {
     it('should update a customer', async () => {
       const updateDto: UpdateCustomerDto = {
-        fristName: 'Jane',
+        firstName: 'Jane',
         lastName: 'Smith',
         email: 'jane.smith@example.com',
         phoneNumber: '+1987654321',

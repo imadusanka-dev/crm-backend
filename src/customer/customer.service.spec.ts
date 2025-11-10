@@ -31,7 +31,7 @@ describe('CustomerService', () => {
   };
 
   const mockCreateDto: CreateCustomerDto = {
-    fristName: 'John',
+    firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@example.com',
     phoneNumber: '+1234567890',
@@ -125,7 +125,7 @@ describe('CustomerService', () => {
 
   describe('update', () => {
     const updateDto: UpdateCustomerDto = {
-      fristName: 'Jane',
+      firstName: 'Jane',
       lastName: 'Smith',
       email: 'jane.smith@example.com',
       phoneNumber: '+1987654321',

@@ -15,7 +15,7 @@ export class CustomerRepository {
     createCustomerDto: CreateCustomerDto,
   ): Promise<Customer> {
     const newCustomer: NewCustomer = {
-      firstName: createCustomerDto.fristName, // Note: keeping the typo from DTO
+      firstName: createCustomerDto.firstName,
       lastName: createCustomerDto.lastName,
       email: createCustomerDto.email,
       phoneNumber: createCustomerDto.phoneNumber,

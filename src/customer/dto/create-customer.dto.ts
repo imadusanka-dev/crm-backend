@@ -11,7 +11,7 @@ export class CreateCustomerDto {
   @ApiProperty({ description: 'First name of the customer', example: 'John' })
   @IsString()
   @IsNotEmpty()
-  fristName: string;
+  firstName: string;
 
   @ApiProperty({ description: 'Last name of the customer', example: 'Doe' })
   @IsString()

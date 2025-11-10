@@ -15,7 +15,7 @@ export class UpdateCustomerDto {
   })
   @IsString()
   @IsNotEmpty()
-  fristName: string;
+  firstName: string;
 
   @ApiProperty({
     description: 'Last name of the customer',
