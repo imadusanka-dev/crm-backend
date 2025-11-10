@@ -24,7 +24,7 @@ async function bootstrap() {
     .addTag('CRM')
     .build();
   const document = SwaggerModule.createDocument(app as any, config);
-  SwaggerModule.setup('api', app as any, document);
+  SwaggerModule.setup('api-docs', app as any, document);
 
   await app.listen(3000);
 }
