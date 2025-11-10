@@ -51,36 +51,9 @@ export class CustomerRepository {
     id: string,
     updateCustomerDto: UpdateCustomerDto,
   ): Promise<Customer> {
-    const updateData: Partial<NewCustomer> = {};
-
-    if (updateCustomerDto.firstName !== undefined) {
-      updateData.firstName = updateCustomerDto.firstName;
-    }
-    if (updateCustomerDto.lastName !== undefined) {
-      updateData.lastName = updateCustomerDto.lastName;
-    }
-    if (updateCustomerDto.email !== undefined) {
-      updateData.email = updateCustomerDto.email;
-    }
-    if (updateCustomerDto.phoneNumber !== undefined) {
-      updateData.phoneNumber = updateCustomerDto.phoneNumber;
-    }
-    if (updateCustomerDto.address !== undefined) {
-      updateData.address = updateCustomerDto.address;
-    }
-    if (updateCustomerDto.city !== undefined) {
-      updateData.city = updateCustomerDto.city;
-    }
-    if (updateCustomerDto.state !== undefined) {
-      updateData.state = updateCustomerDto.state;
-    }
-    if (updateCustomerDto.country !== undefined) {
-      updateData.country = updateCustomerDto.country;
-    }
-
     const [updatedCustomer] = await this.db
       .update(customers)
-      .set(updateData)
+      .set(updateCustomerDto)
       .where(eq(customers.id, id))
       .returning();
 

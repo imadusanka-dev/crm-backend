@@ -1,37 +1,41 @@
-import { IsString, IsEmail, IsOptional, IsPhoneNumber } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsPhoneNumber,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class UpdateCustomerDto {
   @IsString()
-  @IsOptional()
-  firstName?: string;
+  @IsNotEmpty()
+  fristName: string;
 
   @IsString()
-  @IsOptional()
-  lastName?: string;
+  @IsNotEmpty()
+  lastName: string;
 
   @IsEmail()
-  @IsOptional()
-  email?: string;
+  @IsNotEmpty()
+  email: string;
 
   @IsString()
   @IsPhoneNumber()
-  @IsOptional()
-  phoneNumber?: string;
+  phoneNumber: string;
 
   @IsString()
   @IsOptional()
-  address?: string;
+  address: string;
 
   @IsString()
   @IsOptional()
-  city?: string;
+  city: string;
 
   @IsString()
   @IsOptional()
-  state?: string;
+  state: string;
 
   @IsString()
   @IsOptional()
-  country?: string;
+  country: string;
 }
-
