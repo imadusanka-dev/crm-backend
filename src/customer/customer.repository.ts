@@ -1,5 +1,5 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { eq, or, ilike } from 'drizzle-orm';
+import { Injectable, Inject } from '@nestjs/common';
+import { eq, or, ilike, desc } from 'drizzle-orm';
 import { customers, Customer, NewCustomer } from './schema/customer.schema';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -34,7 +34,10 @@ export class CustomerRepository {
   }
 
   async getAllCustomers(): Promise<Customer[]> {
-    return await this.db.select().from(customers);
+    return await this.db
+      .select()
+      .from(customers)
+      .orderBy(desc(customers.createdAt));
   }
 
   async getCustomerById(id: string): Promise<Customer> {
@@ -95,6 +98,7 @@ export class CustomerRepository {
           ilike(customers.firstName, searchPattern),
           ilike(customers.lastName, searchPattern),
         ),
-      );
+      )
+      .orderBy(desc(customers.createdAt));
   }
 }
