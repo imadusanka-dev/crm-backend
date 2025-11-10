@@ -8,6 +8,13 @@
       "when": 1762784146910,
       "tag": "0000_crazy_menace",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1762796176709,
+      "tag": "0001_conscious_wind_dancer",
+      "breakpoints": true
     }
   ]
 }
