@@ -1,5 +1,5 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { eq, or, ilike } from 'drizzle-orm';
 import { customers, Customer, NewCustomer } from './schema/customer.schema';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -34,13 +34,7 @@ export class CustomerRepository {
   }
 
   async getAllCustomers(): Promise<Customer[]> {
-    try {
-      return await this.db.select().from(customers);
-    } catch (error) {
-      throw new Error(
-        `Failed to fetch customers: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return await this.db.select().from(customers);
   }
 
   async getCustomerById(id: string): Promise<Customer> {
@@ -49,10 +43,6 @@ export class CustomerRepository {
       .from(customers)
       .where(eq(customers.id, id))
       .limit(1);
-
-    if (!customer) {
-      throw new NotFoundException(`Customer with ID ${id} not found`);
-    }
 
     return customer;
   }
@@ -94,21 +84,44 @@ export class CustomerRepository {
       .where(eq(customers.id, id))
       .returning();
 
-    if (!updatedCustomer) {
-      throw new NotFoundException(`Customer with ID ${id} not found`);
-    }
-
     return updatedCustomer;
   }
 
-  async deleteCustomer(id: string): Promise<void> {
+  async deleteCustomer(id: string): Promise<Customer | null> {
     const [deletedCustomer] = await this.db
       .delete(customers)
       .where(eq(customers.id, id))
       .returning();
 
-    if (!deletedCustomer) {
-      throw new NotFoundException(`Customer with ID ${id} not found`);
+    return deletedCustomer;
+  }
+
+  async getCustomerByEmail(email: string): Promise<Customer> {
+    const [customer] = await this.db
+      .select()
+      .from(customers)
+      .where(eq(customers.email, email))
+      .limit(1);
+
+    return customer;
+  }
+
+  async searchCustomers(searchTerm: string): Promise<Customer[]> {
+    if (!searchTerm || searchTerm.trim() === '') {
+      return [];
     }
+
+    const searchPattern = `%${searchTerm}%`;
+
+    return await this.db
+      .select()
+      .from(customers)
+      .where(
+        or(
+          ilike(customers.email, searchPattern),
+          ilike(customers.firstName, searchPattern),
+          ilike(customers.lastName, searchPattern),
+        ),
+      );
   }
 }
